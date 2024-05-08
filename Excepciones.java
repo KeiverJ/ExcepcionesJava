@@ -1,6 +1,7 @@
 import java.io.*;
 import java.lang.instrument.IllegalClassFormatException;
 import java.lang.invoke.LambdaConversionException;
+import java.lang.invoke.StringConcatException;
 import java.lang.reflect.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -25,9 +26,10 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeoutException;
+
 import javax.swing.tree.ExpandVetoException;
 import org.ietf.jgss.GSSException;
-
 import javax.management.BadAttributeValueExpException;
 import javax.management.modelmbean.InvalidTargetObjectTypeException;
 import javax.sound.midi.MidiUnavailableException;
@@ -86,6 +88,9 @@ public class Excepciones {
             System.out.println("45. IllegalClassFormatException");
             System.out.println("46. InvalidTargetObjectTypeException");
             System.out.println("47. LambdaConversionException");
+            System.out.println("48. MidiUnavailableException");
+            System.out.println("49. StringConcatenator");
+            System.out.println("50. TimeoutException");
             System.out.println("0. Salir");
 
             System.out.print("Elija una excepción a ejecutar: ");
@@ -235,6 +240,12 @@ public class Excepciones {
                     break;
                 case 48:
                     MidiUnavailableException();
+                    break;
+                case 49:
+                    StringConcatenator("Hola", null);
+                    break;
+                case 50:
+                    TimeoutException();
                     break;
                 case 0:
                     System.out.println("Chao.");
@@ -759,7 +770,7 @@ public class Excepciones {
         }
     }
 
-    public static void InvalidTargetObjectTypeException(){
+    public static void InvalidTargetObjectTypeException() {
         try {
             throw new InvalidTargetObjectTypeException("Tipo de objeto de destino invalido");
         } catch (InvalidTargetObjectTypeException ex) {
@@ -767,8 +778,8 @@ public class Excepciones {
             ex.printStackTrace();
         }
     }
-    
-    public static void LambdaConversionException (){
+
+    public static void LambdaConversionException() {
         try {
             throw new LambdaConversionException("Error: Falló la conversión de la expresión lambda.");
         } catch (LambdaConversionException ex) {
@@ -777,11 +788,33 @@ public class Excepciones {
         }
     }
 
-    public static void MidiUnavailableException(){
+    public static void MidiUnavailableException() {
         try {
             throw new MidiUnavailableException("Error: Dispositivo MIDI no disponible.");
         } catch (MidiUnavailableException ex) {
             System.out.println("Se produjo un error: Dispositivo MIDI no disponible.");
+            ex.printStackTrace();
+        }
+    }
+
+    public static String StringConcatenator(String str1, String str2) {
+        try {
+            if (str1 == null || str2 == null) {
+                throw new StringConcatException("No se puede concatenar una cadena nula.");
+            }
+            return str1 + str2;
+        } catch (StringConcatException ex) {
+            System.out.println("Error al concatenar cadenas: " + ex.getMessage());
+            ex.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void TimeoutException() {
+        try {
+            throw new TimeoutException("Error: Tiempo de espera agotado.");
+        } catch (TimeoutException ex) {
+            System.out.println("Se produjo un error: Tiempo de espera agotado.");
             ex.printStackTrace();
         }
     }
