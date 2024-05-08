@@ -1,4 +1,6 @@
 import java.io.*;
+import java.lang.instrument.IllegalClassFormatException;
+import java.lang.invoke.LambdaConversionException;
 import java.lang.reflect.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -14,6 +16,7 @@ import java.nio.file.ProviderNotFoundException;
 import java.security.Provider;
 import java.security.Provider.Service;
 import java.security.Security;
+import java.security.cert.CertificateExpiredException;
 import java.time.*;
 import java.time.format.DateTimeParseException;
 import java.util.*;
@@ -22,6 +25,12 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import javax.swing.tree.ExpandVetoException;
+import org.ietf.jgss.GSSException;
+
+import javax.management.BadAttributeValueExpException;
+import javax.management.modelmbean.InvalidTargetObjectTypeException;
+import javax.sound.midi.MidiUnavailableException;
 
 public class Excepciones {
     public static void main(String[] args) throws IOException {
@@ -70,6 +79,13 @@ public class Excepciones {
             System.out.println("38. unknownError");
             System.out.println("39. SecurityException");
             System.out.println("40. outOfMemoryError");
+            System.out.println("41. BadAttributeValueExpException");
+            System.out.println("42. CertificateExpiredExceptionExample");
+            System.out.println("43. ExpandVetoException");
+            System.out.println("44. GSSException");
+            System.out.println("45. IllegalClassFormatException");
+            System.out.println("46. InvalidTargetObjectTypeException");
+            System.out.println("47. LambdaConversionException");
             System.out.println("0. Salir");
 
             System.out.print("Elija una excepción a ejecutar: ");
@@ -196,6 +212,30 @@ public class Excepciones {
                 case 40:
                     outOfMemoryError();
                     break;
+                case 41:
+                    BadAttributeValueExpException();
+                    break;
+                case 42:
+                    CertificateExpiredExceptionExample();
+                    break;
+                case 43:
+                    ExpandVetoException();
+                    break;
+                case 44:
+                    GSSException();
+                    break;
+                case 45:
+                    IllegalClassFormatException();
+                    break;
+                case 46:
+                    InvalidTargetObjectTypeException();
+                    break;
+                case 47:
+                    LambdaConversionException();
+                    break;
+                case 48:
+                    MidiUnavailableException();
+                    break;
                 case 0:
                     System.out.println("Chao.");
                     break;
@@ -243,7 +283,8 @@ public class Excepciones {
             String str = "abc";
             int num = Integer.parseInt(str);
         } catch (NumberFormatException ex) {
-            System.out.println("Se produce cuando se intenta convertir una cadena en un tipo numérico, pero la cadena no tiene el formato adecuado.");
+            System.out.println(
+                    "Se produce cuando se intenta convertir una cadena en un tipo numérico, pero la cadena no tiene el formato adecuado.");
             ex.printStackTrace();
         }
     }
@@ -297,7 +338,8 @@ public class Excepciones {
             String str = "123abc";
             int num = Integer.parseInt(str);
         } catch (NumberFormatException ex) {
-            System.out.println("Se produce cuando se intenta convertir una cadena en un tipo numérico, pero la cadena no tiene el formato adecuado.");
+            System.out.println(
+                    "Se produce cuando se intenta convertir una cadena en un tipo numérico, pero la cadena no tiene el formato adecuado.");
             ex.printStackTrace();
         }
     }
@@ -308,7 +350,8 @@ public class Excepciones {
             List<String> lista = new ArrayList<>();
             String elemento = lista.iterator().next();
         } catch (NoSuchElementException ex) {
-            System.out.println("Se produce cuando se intenta acceder a un elemento que no existe en una colección, como una lista vacía o un conjunto sin el elemento especificado.");
+            System.out.println(
+                    "Se produce cuando se intenta acceder a un elemento que no existe en una colección, como una lista vacía o un conjunto sin el elemento especificado.");
             ex.printStackTrace();
         }
     }
@@ -320,7 +363,8 @@ public class Excepciones {
             int num = teclado.nextInt();
             System.out.println(num);
         } catch (InputMismatchException ex) {
-            System.out.println("Este error aparece cuando se ha declarado que la variable es de un tipo y se ingresa un dato de otro tipo.");
+            System.out.println(
+                    "Este error aparece cuando se ha declarado que la variable es de un tipo y se ingresa un dato de otro tipo.");
             ex.printStackTrace();
         }
         teclado.close();
@@ -331,7 +375,8 @@ public class Excepciones {
             List<String> lista = Collections.emptyList();
             lista.add("elemento");
         } catch (UnsupportedOperationException ex) {
-            System.out.println("Se produce cuando se invoca una operación que no es compatible o no está implementada en una clase específica.");
+            System.out.println(
+                    "Se produce cuando se invoca una operación que no es compatible o no está implementada en una clase específica.");
             ex.printStackTrace();
         }
     }
@@ -342,7 +387,8 @@ public class Excepciones {
             Object obj = "cadena";
             Integer num = (Integer) obj;
         } catch (ClassCastException ex) {
-            System.out.println("Se produce cuando se intenta convertir un objeto a un tipo incompatible mediante una operación de casting.");
+            System.out.println(
+                    "Se produce cuando se intenta convertir un objeto a un tipo incompatible mediante una operación de casting.");
             ex.printStackTrace();
         }
     }
@@ -353,7 +399,8 @@ public class Excepciones {
             String str = "Hola";
             char caracter = str.charAt(10);
         } catch (StringIndexOutOfBoundsException ex) {
-            System.out.println("Se produce cuando se intenta acceder a un índice fuera del rango válido de una cadena.");
+            System.out
+                    .println("Se produce cuando se intenta acceder a un índice fuera del rango válido de una cadena.");
             ex.printStackTrace();
         }
     }
@@ -374,7 +421,8 @@ public class Excepciones {
             Object[] array = new Integer[10];
             array[0] = "cadena";
         } catch (ArrayStoreException ex) {
-            System.out.println("Se produce cuando se intenta almacenar un objeto de un tipo incompatible en un array de tipo primitivo.");
+            System.out.println(
+                    "Se produce cuando se intenta almacenar un objeto de un tipo incompatible en un array de tipo primitivo.");
             ex.printStackTrace();
         }
     }
@@ -395,7 +443,8 @@ public class Excepciones {
             String fecha = "2022-13-01";
             LocalDate.parse(fecha);
         } catch (DateTimeParseException ex) {
-            System.out.println("Se produce cuando ocurre un error al analizar una cadena en un objeto de fecha y hora utilizando la API de fecha y hora de Java (java.time).");
+            System.out.println(
+                    "Se produce cuando ocurre un error al analizar una cadena en un objeto de fecha y hora utilizando la API de fecha y hora de Java (java.time).");
             ex.printStackTrace();
         }
     }
@@ -414,7 +463,8 @@ public class Excepciones {
         try {
             Charset charset = Charset.forName("UTF-16LA");
         } catch (UnsupportedCharsetException ex) {
-            System.out.println("Se produce cuando se intenta utilizar un conjunto de caracteres (charset) no soportado por el sistema.");
+            System.out.println(
+                    "Se produce cuando se intenta utilizar un conjunto de caracteres (charset) no soportado por el sistema.");
             ex.printStackTrace();
         }
     }
@@ -423,7 +473,8 @@ public class Excepciones {
         try {
             LocalDate.of(2022, 2, 29);
         } catch (DateTimeException ex) {
-            System.out.println("Se produce cuando ocurre un error relacionado con la manipulación de objetos de fecha y hora utilizando la API de fecha y hora de Java (java.time).");
+            System.out.println(
+                    "Se produce cuando ocurre un error relacionado con la manipulación de objetos de fecha y hora utilizando la API de fecha y hora de Java (java.time).");
             ex.printStackTrace();
         }
     }
@@ -455,7 +506,8 @@ public class Excepciones {
             thread.start();
             thread.start();
         } catch (IllegalThreadStateException ex) {
-            System.out.println("Se produce cuando se realiza una operación inválida en un hilo, como iniciar un hilo que ya ha sido iniciado.");
+            System.out.println(
+                    "Se produce cuando se realiza una operación inválida en un hilo, como iniciar un hilo que ya ha sido iniciado.");
             ex.printStackTrace();
         }
     }
@@ -468,7 +520,8 @@ public class Excepciones {
                 lista.remove(elemento);
             }
         } catch (ConcurrentModificationException ex) {
-            System.out.println("Se produce cuando se detecta una modificación concurrente durante la iteración de una colección utilizando iteradores \"fall-fast\".");
+            System.out.println(
+                    "Se produce cuando se detecta una modificación concurrente durante la iteración de una colección utilizando iteradores \"fall-fast\".");
             ex.printStackTrace();
         }
     }
@@ -479,7 +532,8 @@ public class Excepciones {
             ResourceBundle bundle = ResourceBundle.getBundle("missing_resource");
             String value = bundle.getString("missing_key");
         } catch (MissingResourceException ex) {
-            System.out.println("Se produce cuando no se encuentra un recurso solicitado, como un archivo de propiedades o una clave en un archivo de propiedades.");
+            System.out.println(
+                    "Se produce cuando no se encuentra un recurso solicitado, como un archivo de propiedades o una clave en un archivo de propiedades.");
             ex.printStackTrace();
         }
     }
@@ -491,7 +545,8 @@ public class Excepciones {
         } catch (InterruptedException ex) {
             System.out.println("No entrará aquí");
         } catch (IllegalMonitorStateException ex) {
-            System.out.println("Se produce cuando se realiza una operación de monitoreo ilegal, como esperar o notificar en un objeto sin poseer el bloqueo adecuado.");
+            System.out.println(
+                    "Se produce cuando se realiza una operación de monitoreo ilegal, como esperar o notificar en un objeto sin poseer el bloqueo adecuado.");
             ex.printStackTrace();
         }
     }
@@ -511,7 +566,8 @@ public class Excepciones {
         try {
             String mensaje = String.format("% %", "cadena", 123);
         } catch (IllegalFormatFlagsException ex) {
-            System.out.println("Se produce cuando ocurre un error durante la conversión de un argumento en una cadena de formato.");
+            System.out.println(
+                    "Se produce cuando ocurre un error durante la conversión de un argumento en una cadena de formato.");
             ex.printStackTrace();
         }
     }
@@ -520,7 +576,8 @@ public class Excepciones {
         try {
             Security.addProvider(new MySecurityProvider(null, 0, null));
         } catch (RuntimeException ex) {
-            System.out.println("Se produce cuando ocurre una condición anormal que no puede ser manejada por el código.");
+            System.out
+                    .println("Se produce cuando ocurre una condición anormal que no puede ser manejada por el código.");
             ex.printStackTrace();
         }
     }
@@ -547,7 +604,9 @@ public class Excepciones {
 
     public static void executionException() {
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        Callable<Integer> tarea = () -> { throw new RuntimeException("Error en la tarea"); };
+        Callable<Integer> tarea = () -> {
+            throw new RuntimeException("Error en la tarea");
+        };
         Future<Integer> futuro = executor.submit(tarea);
         try {
             Integer resultado = futuro.get();
@@ -555,7 +614,8 @@ public class Excepciones {
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         } catch (ExecutionException ex) {
-            System.out.println("Se lanza cuando ocurre un error durante la ejecución de un proceso o tarea en un ExecutorService, por lo general como resultado de un error en el proceso que está siendo ejecutado:\n");
+            System.out.println(
+                    "Se lanza cuando ocurre un error durante la ejecución de un proceso o tarea en un ExecutorService, por lo general como resultado de un error en el proceso que está siendo ejecutado:\n");
             ex.printStackTrace();
         }
         executor.shutdown();
@@ -566,7 +626,9 @@ public class Excepciones {
         private static SelectionKey register(Selector selector, int OP_READ) {
             throw new UnsupportedOperationException("Not supported yet.");
         }
-        public channel() {}
+
+        public channel() {
+        }
     }
 
     public static void readOnlyBufferException() {
@@ -582,7 +644,8 @@ public class Excepciones {
     @SuppressWarnings("unused")
     public static void providerNotFoundException() {
         try {
-            Service service = ServiceLoader.load(Service.class).findFirst().orElseThrow(() -> new ProviderNotFoundException("Proveedor no encontrado"));
+            Service service = ServiceLoader.load(Service.class).findFirst()
+                    .orElseThrow(() -> new ProviderNotFoundException("Proveedor no encontrado"));
         } catch (ProviderNotFoundException ex) {
             System.out.println("Se lanza cuando no se puede encontrar un proveedor de servicios específico.");
             ex.printStackTrace();
@@ -594,20 +657,21 @@ public class Excepciones {
         try {
             Path path = Paths.get("///siuuuuuiuui");
         } catch (InvalidPathException ex) {
-            System.out.println("Se lanza cuando se proporciona una cadena de ruta de acceso inválida a los métodos de la clase Path.");
+            System.out.println(
+                    "Se lanza cuando se proporciona una cadena de ruta de acceso inválida a los métodos de la clase Path.");
             ex.printStackTrace();
         }
     }
 
     public static void cloneNotSupportedException() {
         class CustomClass {
-    
+
             @Override
             protected Object clone() throws CloneNotSupportedException {
                 return super.clone();
             }
         }
-    
+
         CustomClass obj = new CustomClass();
         try {
             obj.clone();
@@ -630,17 +694,94 @@ public class Excepciones {
         try {
             throw new SecurityException("Simulando una acción que viola las políticas de seguridad.");
         } catch (SecurityException ex) {
-            System.out.println("Se produce cuando se intenta realizar una acción que viola las políticas de seguridad.");
+            System.out
+                    .println("Se produce cuando se intenta realizar una acción que viola las políticas de seguridad.");
             ex.printStackTrace();
         }
     }
 
-    
     public static void outOfMemoryError() {
         try {
-            throw new OutOfMemoryError("Se lanza cuando el sistema no tiene suficiente memoria para realizar una operación.");
+            throw new OutOfMemoryError(
+                    "Se lanza cuando el sistema no tiene suficiente memoria para realizar una operación.");
         } catch (OutOfMemoryError ex) {
             System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    public static void BadAttributeValueExpException() {
+        try {
+            String atributoInvalido = "nombreAtributo > 10";
+            throw new BadAttributeValueExpException(atributoInvalido);
+        } catch (BadAttributeValueExpException ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    public static void CertificateExpiredExceptionExample() {
+        try {
+            String mensaje = "El certificado ha expirado";
+            throw new CertificateExpiredException(mensaje);
+        } catch (CertificateExpiredException ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    public static void ExpandVetoException() {
+        try {
+            throw new ExpandVetoException(null, "Se lanza cuando se veta la expansión de un componente.");
+        } catch (ExpandVetoException ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    public static void GSSException() {
+        try {
+            throw new GSSException(GSSException.FAILURE, -1, "Error de autenticación GSS.");
+        } catch (GSSException ex) {
+            System.out.println("Código de error: " + ex.getMajor());
+            System.out.println("Código de error secundario: " + ex.getMinor());
+            System.out.println("Mensaje de error: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    public static void IllegalClassFormatException() {
+        try {
+            throw new IllegalClassFormatException("Formato de clase no válido.");
+        } catch (IllegalClassFormatException ex) {
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    public static void InvalidTargetObjectTypeException(){
+        try {
+            throw new InvalidTargetObjectTypeException("Tipo de objeto de destino invalido");
+        } catch (InvalidTargetObjectTypeException ex) {
+            System.err.println("Ocurrio una excepcion de tipo de objeto de destino invalido: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+    
+    public static void LambdaConversionException (){
+        try {
+            throw new LambdaConversionException("Error: Falló la conversión de la expresión lambda.");
+        } catch (LambdaConversionException ex) {
+            System.out.println("Se produjo un error en la conversión de la expresión lambda: " + ex.getMessage());
+            ex.printStackTrace();
+        }
+    }
+
+    public static void MidiUnavailableException(){
+        try {
+            throw new MidiUnavailableException("Error: Dispositivo MIDI no disponible.");
+        } catch (MidiUnavailableException ex) {
+            System.out.println("Se produjo un error: Dispositivo MIDI no disponible.");
             ex.printStackTrace();
         }
     }
@@ -656,4 +797,5 @@ public class Excepciones {
     public static void metodoCiclado() {
         metodoCiclado();
     }
+
 }
